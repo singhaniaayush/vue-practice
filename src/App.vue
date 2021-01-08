@@ -1,17 +1,47 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app">
+    {{ user.userName }} - {{ fullName }}
+    <div><strong> followers </strong> {{ followers }}</div>
+    <button @click="follow">follow</button>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  name: "App",
+  data() {
+    return {
+      followers: 0,
+      user: {
+        id: 1,
+        userName: "@ayushSinghania",
+        firstName: "Ayush",
+        lastName: "Singhania",
+        email: "ayushSinghania@gmail.com",
+        isAdmin: true,
+      },
+    };
+  },
+  computed: {
+    fullName() {
+      return `${this.user.firstName} ${this.user.lastName}`;
+    },
+  },
+
+  methods: {
+    follow() {
+      this.followers++;
+    },
+  },
+  watch: {
+    followers(oldValue, newValue) {
+      console.log(oldValue + ':' + newValue);
+    },
+  },
+  mounted() {
+    this.follow();
+  },
+};
 </script>
 
 <style>
